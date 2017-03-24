@@ -1,4 +1,4 @@
-FROM trek10/ci:2.0
+FROM trek10/ci:3.0
 MAINTAINER Marc Rosenthal <marc@affordabletours.com>
 
 # custom part
