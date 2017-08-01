@@ -1,4 +1,4 @@
-FROM trek10/ci:3.0
+FROM trek10/ci:3.5-serverless
 MAINTAINER Marc Rosenthal <marc@affordabletours.com>
 
 # custom part
