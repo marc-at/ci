@@ -4,6 +4,6 @@ MAINTAINER Marc Rosenthal <marc@affordabletours.com>
 # custom part
 RUN yum -y install openssh-clients git
 
-RUN npm i npm -g
+RUN npm --loglevel silent i npm@5.2.0 -g >/dev/null
 
-RUN npm install bluebird vue vue-router vue-resource vuex -g
+# RUN npm install bluebird vue vue-router vue-resource vuex -g
