@@ -1,7 +1,7 @@
 FROM amazonlinux:with-sources
 MAINTAINER Marc Rosenthal <marc@affordabletours.com>
 
-# gpg keys listed at https://github.com/nodejs/node 
+# gpg keys listed at https://github.com/nodejs/node
 RUN set -ex \
   && for key in \
     94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
@@ -14,6 +14,7 @@ RUN set -ex \
     gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "$key"; \
   done
 
+
 ENV NPM_CONFIG_LOGLEVEL info 
 ENV NODE_VERSION 6.9.2
 
@@ -21,13 +22,17 @@ RUN yum update -y
 RUN yum install xz -y
 RUN yum install git -y
 RUN yum install openssh-clients -y
-RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz"
-RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc"
-RUN gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc
-RUN grep " node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c -
-RUN tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1
-RUN rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
-RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs
+
+RUN ARCH=x64 \
+  && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz" \
+  && curl -SLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
+  && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
+  && grep " node-v$NODE_VERSION-linux-$ARCH.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
+  && tar -xJf "node-v$NODE_VERSION-linux-$ARCH.tar.xz" -C /usr/local --strip-components=1 \
+  && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
+&& ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
 RUN npm install -g serverless@1.17.0
-RUN npm install -g npm@5.2.0
+# very annoying bug with npm prevents npm from being installed in the docker container
+# https://github.com/npm/npm/issues/16807
+# RUN npm install -g npm@5.2.0
