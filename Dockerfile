@@ -22,6 +22,7 @@ RUN yum update -y
 RUN yum install xz -y
 RUN yum install git -y
 RUN yum install openssh-clients -y
+RUN yum install wget bzip2 -y
 
 RUN ARCH=x64 \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz" \
