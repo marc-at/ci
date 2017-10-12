@@ -18,7 +18,7 @@ RUN set -ex \
 ENV NPM_CONFIG_LOGLEVEL info 
 ENV NODE_VERSION 6.9.2
 
-RUN yum update -y && yum install xz git openssh-clients -y
+RUN yum update -y && yum install xz git openssh-clients bzip2 -y
 
 RUN ARCH=x64 \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz" \
