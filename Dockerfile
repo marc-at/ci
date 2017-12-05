@@ -29,7 +29,7 @@ RUN ARCH=x64 \
   && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
 && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-RUN npm install -g serverless@1.17.0
+RUN npm install -g serverless@1.23.0
 # very annoying bug with npm prevents npm from being installed in the docker container
 # https://github.com/npm/npm/issues/16807
 # RUN npm install -g npm@5.2.0
