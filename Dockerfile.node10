@@ -14,3 +14,8 @@ RUN npm install -g npm
 # install serverless framework
 RUN npm install -g serverless@1.44.1
 RUN npm install -g @aws-amplify/cli
+
+RUN curl -O https://bootstrap.pypa.io/get-pip.py
+RUN python get-pip.py --user
+ENV PATH /root/.local/bin:$PATH
+RUN pip install awscli --upgrade --user
