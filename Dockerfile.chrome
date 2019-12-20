@@ -22,3 +22,5 @@ RUN pip install awscli --upgrade --user
 
 # install chrome
 RUN curl https://intoli.com/install-google-chrome.sh | bash
+
+ENV CHROME_PATH /opt/google/chrome
