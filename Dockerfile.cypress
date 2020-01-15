@@ -1,6 +1,7 @@
 FROM cypress/base:10
 MAINTAINER Marc Rosenthal <marc@affordabletours.com>
 
+RUN apt-get update
 RUN apt-get install -y unzip
 
 RUN npm install --save-dev cypress
