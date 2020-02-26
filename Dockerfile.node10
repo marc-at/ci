@@ -12,7 +12,7 @@ RUN yum -y install nodejs
 RUN npm install -g npm
 
 # install serverless framework
-RUN npm install -g serverless@1.44.1
+RUN npm install -g serverless@1.59.3
 RUN npm install -g @aws-amplify/cli
 
 RUN curl -O https://bootstrap.pypa.io/get-pip.py
