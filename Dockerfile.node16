@@ -1,0 +1,21 @@
+FROM amazonlinux:with-sources
+MAINTAINER Marc Rosenthal <marc@affordabletours.com>
+
+RUN yum update -y
+RUN yum -y install xz git openssh-clients bzip2 gcc-c++ zip openssl
+
+# add nodejs repo
+RUN curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -
+RUN yum -y install nodejs
+
+# update npm to latest version
+RUN npm install -g npm
+
+# install serverless framework
+#RUN npm install -g serverless@1.59.3
+#RUN npm install -g @aws-amplify/cli
+
+RUN curl -O https://bootstrap.pypa.io/get-pip.py
+RUN python get-pip.py --user
+ENV PATH /root/.local/bin:$PATH
+RUN pip install awscli --upgrade --user
